@@ -1,0 +1,61 @@
+{
+  "name": "ciphera/craft-pulse-analytics",
+  "description": "Privacy-first web analytics for Craft CMS. No cookies, no personal data, and the script it adds to your pages is under 3 KB.",
+  "type": "craft-plugin",
+  "license": "Apache-2.0",
+  "keywords": [
+    "craft",
+    "cms",
+    "craftcms",
+    "craft-plugin",
+    "analytics",
+    "privacy",
+    "cookieless"
+  ],
+  "homepage": "https://pulse.ciphera.net",
+  "authors": [
+    {
+      "name": "Ciphera",
+      "homepage": "https://ciphera.net"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/ciphera-net/pulse-craft/issues",
+    "source": "https://github.com/ciphera-net/pulse-craft",
+    "docs": "https://docs.ciphera.net/pulse"
+  },
+  "require": {
+    "php": "^8.2",
+    "craftcms/cms": "^5.0.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^11.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "ciphera\\pulseanalytics\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "ciphera\\pulseanalytics\\tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "name": "Pulse Analytics",
+    "handle": "pulse-analytics",
+    "developer": "Ciphera",
+    "developerUrl": "https://ciphera.net",
+    "documentationUrl": "https://docs.ciphera.net/pulse",
+    "changelogUrl": "https://github.com/ciphera-net/pulse-craft/releases"
+  },
+  "config": {
+    "allow-plugins": {
+      "craftcms/plugin-installer": true,
+      "yiisoft/yii2-composer": true
+    },
+    "sort-packages": true
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
+}

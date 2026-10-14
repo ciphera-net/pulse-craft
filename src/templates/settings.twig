@@ -1,0 +1,45 @@
+{#
+  Pulse Analytics settings.
+
+  Rendered by Plugin::settingsHtml() at Settings -> Plugins -> Pulse Analytics.
+  `settings` is the Settings model (src/models/Settings.php); its own
+  validators attach field errors to it, which `forms.textField()` reads via
+  `errors:` the same way every other Craft settings screen does.
+#}
+{% import '_includes/forms' as forms %}
+
+<p>
+  {{ 'Add {pulse} to this site. No cookies, no personal data, and the script it adds to your pages is under 3 KB. You need a Pulse account with a site registered for the same domain.'|t('pulse-analytics', {
+    pulse: '<a href="https://pulse.ciphera.net" target="_blank" rel="noopener">Pulse Analytics</a>',
+  })|raw }}
+</p>
+
+{{ forms.textField({
+  label: 'Domain'|t('pulse-analytics'),
+  instructions: 'The domain this site is registered under in Pulse, for example `example.com`. Leave empty to let the tracker use the browser’s own hostname, which is correct for a site served on one domain.'|t('pulse-analytics'),
+  id: 'domain',
+  name: 'domain',
+  value: settings.domain,
+  errors: settings.getErrors('domain'),
+}) }}
+
+{{ forms.lightswitchField({
+  label: 'Record clicks, copies and form submits'|t('pulse-analytics'),
+  instructions: 'Loads a second, separate script. It is a second request on purpose: the core script’s size is a published claim, and nothing is folded into it to make a feature look free.'|t('pulse-analytics'),
+  id: 'companion',
+  name: 'companion',
+  on: settings.companion,
+}) }}
+
+{{ forms.textField({
+  label: 'Custom API origin'|t('pulse-analytics'),
+  instructions: 'Optional. Route events through your own proxy origin, for example `https://example.com`. A bare origin, not a full URL — the tracker appends its own path. Leave empty unless you have set a proxy up.'|t('pulse-analytics'),
+  id: 'apiOrigin',
+  name: 'apiOrigin',
+  value: settings.apiOrigin,
+  errors: settings.getErrors('apiOrigin'),
+}) }}
+
+<p class="light">
+  {{ 'This never runs on the control panel, and cannot be set to.'|t('pulse-analytics') }}
+</p>
