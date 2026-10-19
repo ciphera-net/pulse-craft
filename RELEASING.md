@@ -110,8 +110,8 @@ the short `pulse-analytics`, matching every other platform's public name.
    - Fill in: Short Description, Long Description (see `LISTING.md`),
      Categories and Keywords, the Documentation URL
      (`https://docs.ciphera.net/pulse`), the Changelog Path (`CHANGELOG.md`),
-     and upload `src/icon.svg` as the plugin icon (square SVG, the Pulse mark
-     — the same asset the Framer listing uses, not Craft's own logo: nothing
+     and upload `src/icon.svg` as the plugin icon (a square 512 × 512 SVG, the
+     Pulse mark on the dark ground `#0a0a0a`, not Craft's own logo: nothing
      in Craft's trademark guidance was found granting a co-brand icon, so this
      plugin's icon carries only the Pulse mark).
    - Pricing: **Free**. The docs are explicit that a plugin submitted free
