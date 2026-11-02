@@ -14,13 +14,13 @@ and the accounts it needs.
 Keep this to a single line; the Plugin Store truncates long ones on card
 views.
 
-> Privacy-first web analytics. No cookies, no personal data, and the script it adds to your pages is under 3 KB.
+> Privacy-first web analytics. No cookies, no IP addresses stored, and the script it adds to your pages is under 3 KB.
 
 ## Long description
 
 ```markdown
 Pulse Analytics adds privacy-first web analytics to a Craft CMS site with one
-plugin. It sets no cookies, stores no personal data, and the script it adds to
+plugin. It sets no cookies, never stores IP addresses, and the script it adds to
 your pages is under 3 KB.
 
 ## How it works
