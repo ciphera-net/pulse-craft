@@ -5,6 +5,10 @@ docs ask for a heading in exactly this form:
 `## <version> - <YYYY-MM-DD>`. Keep that shape — it's what the automated
 Craft Console listing parses, not a style preference.
 
+## 1.0.3 - 2026-11-09
+
+- The plugin description in the control panel is written in full sentences, and the changelog link now points at this file. The plugin's code did not change.
+
 ## 1.0.2 - 2026-11-09
 
 - The help text on the settings screen is shorter and clearer. Nothing else changed.
