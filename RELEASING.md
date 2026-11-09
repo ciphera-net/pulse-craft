@@ -1,8 +1,8 @@
 # Releasing Pulse Analytics for Craft CMS
 
-**Status (14-10-2026):** `v1.0.0` is tagged and on Packagist
-(`composer require ciphera/craft-pulse-analytics`; account `ciphera`, with a GitHub
-push hook so new tags update the listing on their own). The Plugin Store listing
+**Status (09-11-2026):** `v1.0.0` was the first release and Packagist serves
+`v1.0.1` (`composer require ciphera/craft-pulse-analytics`; account `ciphera`, with a
+GitHub push hook so new tags update the listing on their own). The Plugin Store listing
 (step 2 below) still needs a Craft Console account. This file is the exact
 sequence, the account each step needs, and what the Plugin Store actually reviews — assembled from Craft's
 own current docs (`craftcms.com/docs/5.x/extend/plugin-store.html` and

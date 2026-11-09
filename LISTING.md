@@ -5,6 +5,11 @@ Description, Categories, Keywords) and the screenshots to prepare before
 submitting. Not yet submitted — see RELEASING.md for the submission sequence
 and the accounts it needs.
 
+**Status (09-11-2026):** not submitted. The plugin is on Packagist
+(`ciphera/craft-pulse-analytics`, serving v1.0.1) and the GitHub repository is
+public. The Plugin Store listing still needs a Craft Console account, which does
+not exist yet.
+
 ## Name
 
 **Pulse Analytics**
@@ -14,48 +19,32 @@ and the accounts it needs.
 Keep this to a single line; the Plugin Store truncates long ones on card
 views.
 
-> Privacy-first web analytics. No cookies, no IP addresses stored, and the script it adds to your pages is under 3 KB.
+> Pulse Analytics counts visitors without cookies or stored IP addresses. The script this plugin adds to your pages is under 3 KB.
 
 ## Long description
 
 ```markdown
-Pulse Analytics adds privacy-first web analytics to a Craft CMS site with one
-plugin. It sets no cookies, never stores IP addresses, and the script it adds to
-your pages is under 3 KB.
+Pulse Analytics adds privacy-first web analytics to a Craft CMS site with one plugin. It sets no cookies and never stores IP addresses. The script it adds to your pages is under 3 KB.
 
 ## How it works
 
-1. `composer require ciphera/craft-pulse-analytics` and
-   `php craft plugin/install pulse-analytics`.
-2. Go to Settings → Plugins → Pulse Analytics and enter the domain your site
-   is registered under in Pulse — or leave it empty and the tracker uses the
-   browser's own hostname, correct for a site served on one domain.
-3. Make sure your layout calls `{{ head() }}` — Craft only outputs
-   head-registered scripts there, same as any other asset this plugin's
-   mechanism registers.
+1. Run `composer require ciphera/craft-pulse-analytics` and `php craft plugin/install pulse-analytics`.
+2. Go to Settings → Plugins → Pulse Analytics and enter the domain your site is registered under in Pulse. If you leave it empty, the tracker uses the browser's own hostname, which is right for a site served on one domain.
+3. Make sure your layout calls `{{ head() }}`. Craft outputs head-registered scripts only at that call, and this plugin registers its script that way.
 
 Your dashboard at pulse.ciphera.net shows visitors as they arrive.
 
 ## What it measures
 
-Pageviews, referrers, countries, devices, time on page and scroll depth, plus
-the goals, funnels and campaigns you set up, in one dashboard hosted in
-Switzerland. Visitors whose browser sends Do Not Track or Global Privacy
-Control are not counted at all. The control panel is never tagged — that is
-not a setting, it is how the plugin works.
+Pulse counts pageviews, referrers, countries, devices, time on page and scroll depth, plus the goals, funnels and campaigns you set up, in one dashboard hosted in Switzerland. It does not count visitors whose browser sends Do Not Track or Global Privacy Control. The plugin never tags the control panel, and no setting changes that.
 
 ## Options
 
-A companion script for clicks, copies and form submits, loaded as a second
-request so you only pay for it if you want it, and a custom API origin if you
-route events through your own proxy.
+You can add a companion script for clicks, copies and form submits. It loads as a second request, so you only pay for it if you want it. You can also set a custom API origin if you route events through your own proxy.
 
 ## You need
 
-Craft CMS 5, PHP 8.2+, and a Pulse Analytics account with a site registered
-for the same domain. The free plan is enough to start: one site, 5,000
-pageviews a month, no card. Business plans start from €11/month, with every
-feature on every plan.
+Craft CMS 5, PHP 8.2+, and a Pulse Analytics account with a site registered for the same domain. The free plan covers one site and 10,000 events a month, and you do not need a card. Business starts at €9 a month with VAT. Every plan has every feature.
 ```
 
 ## Categories and keywords
