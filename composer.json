@@ -47,7 +47,7 @@
     "developer": "Ciphera",
     "developerUrl": "https://ciphera.net",
     "documentationUrl": "https://docs.ciphera.net/pulse",
-    "changelogUrl": "https://github.com/ciphera-net/pulse-craft/releases"
+    "changelogUrl": "https://raw.githubusercontent.com/ciphera-net/pulse-craft/main/CHANGELOG.md"
   },
   "config": {
     "allow-plugins": {
