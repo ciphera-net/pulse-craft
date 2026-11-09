@@ -120,8 +120,8 @@ developer documentation lists the open-source licences it accepts for a free
 plugin: *"Apache-2.0, GPL-2.0, GPL-3.0, MIT"*
 (`craftcms.com/docs/5.x/extend/plugin-store.html`). It describes MIT as
 "generally recommended, unless you have a good reason to use something else",
-but does not require it. Apache-2.0 is the licence every other public Pulse
-integration uses, so there is no divergence to explain here, unlike those
+but does not require it. Apache-2.0 is the licence most other public Pulse
+integrations use, so this plugin has no divergence to explain, unlike those
 three.
 
 The licence file is named **`LICENSE.md`** instead of `LICENSE.txt` or
@@ -134,8 +134,7 @@ submitted as-is.
 ## Composer package name
 
 This package is `ciphera/craft-pulse-analytics`. `ciphera/pulse-analytics` is
-the Packagist name reserved for the (separately built and not yet published)
-TYPO3 extension. Packagist names are global and unique across every ecosystem
+the Packagist name of the TYPO3 extension. Packagist names are global and unique across every ecosystem
 that reads from it, including Craft's Plugin Store, so the two could not share
 one name. The plugin's **handle**, which is what you see in the control panel
 URL and pass to `php craft plugin/install`, stays the short `pulse-analytics`,
