@@ -1,0 +1,49 @@
+# Runs on pull_request AND on push to main.
+#
+# A workflow that only runs on pull requests checks the proposal and never the
+# branch that ships, so this one runs on both.
+#
+# What this covers: the PHPUnit suite in tests/. It runs against the real
+# craft\base\Model and the real Yii validators from the Composer packages,
+# without a Craft application, a database or a web request (tests/bootstrap.php
+# explains why that works).
+#
+# What this does NOT cover: how Craft renders the tag (attribute order, the
+# bare `defer`) and the control panel guard in Plugin::attachTrackerTag(),
+# which need a real Craft install. scripts/verify.sh runs that before a release.
+#
+# composer.lock is not committed (this is a plugin), so the install resolves the
+# newest releases the version constraints allow. A red run on an unchanged
+# branch therefore means a dependency moved, or Composer now refuses a release
+# that has a published security advisory.
+when:
+  - event: pull_request
+  - event: push
+    branch: main
+
+labels:
+  runner: k8s
+
+steps:
+  - name: test
+    image: registry.ops.ciphera.net/mirror/docker.io/library/composer:2.11.1@sha256:07cb23c4c9d528524a8b9a67c403d6ad7fef2268651eb1448e3874d40f28b789
+    backend_options:
+      kubernetes:
+        resources:
+          requests: { memory: 512Mi, cpu: 250m }
+          limits: { memory: 2Gi }
+    commands:
+      - php --version
+      - composer --version
+      # craftcms/cms and its dependencies require ext-bcmath, ext-gd and ext-intl,
+      # and this image has none of them. The suite only loads craft\base\Model,
+      # Craft::t() and Yii. Only these three are ignored, so any other missing
+      # extension still fails the install.
+      - composer install --no-interaction --no-progress --prefer-dist --ignore-platform-req=ext-bcmath --ignore-platform-req=ext-gd --ignore-platform-req=ext-intl
+      # The count is asserted rather than trusted. It is a floor, not an
+      # equality: adding tests must never redden the build.
+      - |
+        vendor/bin/phpunit --colors=never --log-junit /tmp/phpunit-junit.xml
+        COUNT=$(php -r '$x = simplexml_load_file("/tmp/phpunit-junit.xml"); echo (int) $x->testsuite["tests"];')
+        echo "phpunit collected $COUNT test(s)"
+        [ "$COUNT" -ge 24 ] || { echo "REFUSING: expected at least 24 tests, collected $COUNT. The suite shrank or stopped being collected."; exit 1; }
