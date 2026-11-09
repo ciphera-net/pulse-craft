@@ -6,9 +6,9 @@ submitting. Not yet submitted — see RELEASING.md for the submission sequence
 and the accounts it needs.
 
 **Status (09-11-2026):** not submitted. The plugin is on Packagist
-(`ciphera/craft-pulse-analytics`, serving v1.0.1) and the GitHub repository is
-public. The Plugin Store listing still needs a Craft Console account, which does
-not exist yet.
+(`ciphera/craft-pulse-analytics`) and the GitHub repository is public, and the
+screenshots are ready (below). The Plugin Store listing still needs a Craft
+Console account, which does not exist yet.
 
 ## Name
 
@@ -67,25 +67,16 @@ were not observed first-hand.
 **Keywords:** `analytics`, `privacy`, `cookieless`, `tracking`, `statistics`,
 `pulse`, `ciphera`
 
-## Screenshots to prepare before submitting
+## Screenshots
 
-None exist yet. What to capture, at a size consistent with other current
-Plugin Store listings (checked a handful of live entries; card images read
-roughly 16:9, no exact pixel spec found in the docs — measure one of the three
-reference plugins' live images before finalising):
+Two screenshots were captured on 09-11-2026 from a real Craft 5.12 install running plugin 1.0.2. They are kept
+outside this repository.
 
-1. **Settings → Plugins → Pulse Analytics**, the settings screen this plugin
-   ships (`src/templates/settings.twig`) — domain field, the companion
-   lightswitch, custom API origin, all visible with the domain field showing a
-   real-looking example value.
-2. **A view-source or dev-tools network panel** on a front-end page, showing
-   the literal `<script src="https://js.ciphera.net/script.js" …>` tag in the
-   rendered `<head>` — the strongest single piece of evidence that this does
-   exactly what it says, and the shape every one of this family's other
-   platform listings leads with.
-3. *(Optional, if a Pulse account is available for the capture)* the Pulse
-   dashboard itself, showing live data from a Craft site — not required, and
-   not fabricated if unavailable.
+1. **Settings → Plugins → Pulse Analytics** (2560 x 1600), saved with the domain `example.com`.
+2. **The page source** of a front-end page (2700 x 1686), with the tag the plugin adds on line 7, inside `<head>`.
+
+The Plugin Store scales screenshots to 2200 px wide, and the listed plugins we measured use ratios between 4:3 and
+about 16:9. A third screenshot, of the Pulse dashboard, is optional.
 
 ## Links
 
