@@ -94,8 +94,11 @@ this platform, unlike Drupal/Joomla/TYPO3, is not forced into GPL, and for the
 
 ## Icon
 
-`src/icon.svg` is the Pulse mark alone on the dark ground `#0a0a0a`: a
-512 × 512 vector made of paths and linear gradients, with no embedded raster.
+`src/icon.svg` is the Pulse mark in white layers on the brand orange `#FD5E0F`,
+the same mark as Ciphera's profile pictures: a 512 × 512 vector made of one
+square and two paths, with no embedded raster. It is copied byte for byte from
+the brand library (`https://cdn.ciphera.net/brand/v12/kit/craft/pulse/icon.svg`,
+SHA-256 `2255d21f32933e8f33a919943cc8423dda260343a12088347e5ab183930e0abe`).
 Craft's plugin guide asks for a square `icon.svg` in the root of the source
 directory, and Craft shows it on Settings → Plugins. An optional
 `icon-mask.svg` styles the nav item of a plugin that has a control panel
@@ -103,9 +106,12 @@ section; this plugin has none (`hasCpSection` is `false`), so there is no mask
 file.
 
 On Settings → Plugins, Craft passes the icon through its SVG sanitizer.
-Measured against Craft 5.11.5.1 on 19-10-2026, the sanitizer removes the
-`<title>` element and nothing else. The gradients, the nested `<svg>` and every
-attribute survive, and the rendered pixels are identical.
+Measured against Craft 5.11.5.1 on 19-10-2026 with the earlier dark icon, the
+sanitizer removed the `<title>` element and nothing else. The orange icon of
+10-11-2026 uses only `svg`, `rect`, `path` and `title` elements and the `fill`,
+`fill-opacity`, `rx`, `viewBox`, `x`, `y`, `width`, `height` and `d`
+attributes, all on the allow lists of the sanitizer library Craft uses
+(`enshrined/svg-sanitize`). It has not been rendered in Craft yet.
 
 No Craft/Pixel & Tonic mark appears anywhere on the listing: nothing in
 Craft's plugin-store documentation was found granting a co-brand icon or logo
