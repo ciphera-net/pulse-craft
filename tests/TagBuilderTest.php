@@ -124,18 +124,21 @@ final class TagBuilderTest extends TestCase
         self::assertArrayNotHasKey('data-api', $options);
     }
 
-    public function testCompanionTagCarriesNoDomain(): void
+    public function testThereIsNoCompanionTagAndNoDataFlagIsEmitted(): void
     {
-        [$url, $options] = TagBuilder::companionTag();
+        self::assertFalse(method_exists(TagBuilder::class, 'companionTag'));
+        self::assertFalse(defined(TagBuilder::class . '::COMPANION_URL'));
 
-        self::assertSame(TagBuilder::COMPANION_URL, $url);
-        self::assertSame(['defer' => true], $options);
+        [, $options] = TagBuilder::trackerTag('example.com', 'https://proxy.example.com');
+        foreach (array_keys($options) as $key) {
+            self::assertDoesNotMatchRegularExpression('/^data-(no|ignore)-/', (string) $key);
+        }
+        self::assertSame('https://proxy.example.com', $options['data-api']);
     }
 
     public function testPointsAtJsCipheraNetAndNowhereElse(): void
     {
         self::assertSame('https://js.ciphera.net/script.js', TagBuilder::SCRIPT_URL);
-        self::assertSame('https://js.ciphera.net/script.interactions.js', TagBuilder::COMPANION_URL);
     }
 
     public function testNormalizeApiOriginStripsTrailingSlashesOnly(): void

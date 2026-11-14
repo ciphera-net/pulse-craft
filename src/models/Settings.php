@@ -11,9 +11,9 @@ use ciphera\pulseanalytics\TagBuilder;
 /**
  * Pulse Analytics settings.
  *
- * Three fields, matching the Drupal, Joomla and TYPO3 integrations: a domain
- * (empty means auto-detect), the companion-script toggle, and a custom API
- * origin. There is no "also track administration pages" toggle here — unlike
+ * Two fields: a domain (empty means auto-detect) and a custom API origin.
+ * Scroll depth, outbound links, file downloads and interactions are decided by
+ * the site's settings in Pulse, so nothing here switches them. There is no "also track administration pages" toggle here — unlike
  * those platforms, Craft's control panel is a wholly separate application
  * from the front end, and the plugin never attaches the tag there at all
  * (see Plugin::attachTrackerTag()), so there is nothing for a toggle to turn
@@ -32,13 +32,6 @@ class Settings extends Model
     public string $domain = '';
 
     /**
-     * Whether to also load the companion script (clicks, copies, form
-     * submits). Off by default: it is a second, separate request, and
-     * nothing is folded into the core script to make the feature look free.
-     */
-    public bool $companion = false;
-
-    /**
      * A custom API origin (a bare origin, not a full URL), or '' for the
      * default.
      */
@@ -52,8 +45,6 @@ class Settings extends Model
             [['apiOrigin'], 'filter', 'filter' => [TagBuilder::class, 'normalizeApiOrigin'], 'skipOnEmpty' => true],
             [['domain'], 'validateDomainAttribute'],
             [['apiOrigin'], 'validateApiOriginAttribute'],
-            [['companion'], 'boolean'],
-            [['companion'], 'default', 'value' => false],
         ];
     }
 

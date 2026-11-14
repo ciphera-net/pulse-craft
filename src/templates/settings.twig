@@ -9,7 +9,7 @@
 {% import '_includes/forms' as forms %}
 
 <p>
-  {{ 'This plugin adds {pulse} to your site with a script under 3 KB. Pulse sets no cookies and never stores IP addresses. You need a Pulse account with a site registered for the same domain.'|t('pulse-analytics', {
+  {{ 'This plugin adds {pulse} to your site with a script of about 3 KB. Pulse sets no cookies and never stores IP addresses. You need a Pulse account with a site registered for the same domain.'|t('pulse-analytics', {
     pulse: '<a href="https://pulse.ciphera.net" target="_blank" rel="noopener">Pulse Analytics</a>',
   })|raw }}
 </p>
@@ -23,14 +23,6 @@
   errors: settings.getErrors('domain'),
 }) }}
 
-{{ forms.lightswitchField({
-  label: 'Record clicks, copies and form submits'|t('pulse-analytics'),
-  instructions: 'This adds a second script as a separate request, so your pages only load it when you switch this on.'|t('pulse-analytics'),
-  id: 'companion',
-  name: 'companion',
-  on: settings.companion,
-}) }}
-
 {{ forms.textField({
   label: 'Custom API origin'|t('pulse-analytics'),
   instructions: 'If you route events through your own proxy, enter its origin here, for example `https://example.com`. Enter the origin only, without a path, because the tracker adds its own. Leave this empty if you have not set up a proxy.'|t('pulse-analytics'),
@@ -39,6 +31,10 @@
   value: settings.apiOrigin,
   errors: settings.getErrors('apiOrigin'),
 }) }}
+
+<p class="light">
+  {{ 'Scroll depth, outbound links, file downloads, and clicks, copies and form submits are each switched on or off in your site\'s settings in Pulse (Settings > General). The tag stays the same, so there is nothing to change here.'|t('pulse-analytics') }}
+</p>
 
 <p class="light">
   {{ 'The plugin never adds the script to the control panel, and no setting changes that.'|t('pulse-analytics') }}

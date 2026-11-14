@@ -2,7 +2,7 @@
 
 This plugin adds privacy-first analytics to a Craft CMS site. Pulse Analytics
 sets no cookies and never stores IP addresses, and the script the plugin adds
-to your pages is under 3 KB.
+to your pages is about 3 KB.
 
 [Pulse Analytics](https://pulse.ciphera.net) is built by
 [Ciphera](https://ciphera.net), a company in Belgium, and hosted in
@@ -39,7 +39,6 @@ auto-detects correctly for each site individually.
 | Setting | Default | What it does |
 |---|---|---|
 | Domain | empty | The domain this site is registered under in Pulse. Empty means auto-detect. |
-| Record clicks, copies and form submits | off | Loads the companion script as a second, separate request (see below). |
 | Custom API origin | empty | Route events through your own proxy origin. Enter the origin only, without a path. |
 
 Settings are stored in Craft's project config, so they travel with
@@ -93,13 +92,9 @@ fine is the worst outcome this plugin can produce, so the form shows an error
 message. The same is true of a custom API origin that doesn't start with
 `http://` or `https://`.
 
-## The interaction capture is a second request on purpose
+## What the site's settings in Pulse decide
 
-The core script's size is a published claim, and nothing is folded into it to
-make a feature look free. Turning on "Record clicks, copies and form submits"
-registers a second `<script>` pointed at a different URL
-(`script.interactions.js`); it carries no `data-domain` of its own, because the
-tracker resolves the domain once, from the core script.
+Scroll depth, outbound links, file downloads, and clicks, copies and form submits are each switched on or off in your site's settings in Pulse (Settings → General). The tag stays the same, so there is nothing to change here.
 
 ## Why `registerJsFile()` instead of a hand-built `<script>` string
 

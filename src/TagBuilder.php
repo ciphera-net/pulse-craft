@@ -14,8 +14,7 @@ namespace ciphera\pulseanalytics;
  * it can be read side by side with the same decisions in the Drupal, Joomla,
  * TYPO3, Astro, Framer and Docusaurus integrations.
  *
- * The URLs, the domain grammar and the rule that the companion script is a
- * SECOND request are copied from those integrations rather than re-derived.
+ * The URLs and the domain grammar are copied from those integrations rather than re-derived.
  * Pulse install surfaces disagreeing about what the tag looks like is a drift
  * bug waiting to happen.
  */
@@ -25,11 +24,6 @@ final class TagBuilder
      * The Pulse tracker.
      */
     public const SCRIPT_URL = 'https://js.ciphera.net/script.js';
-
-    /**
-     * The companion script: clicks, copies and form submits.
-     */
-    public const COMPANION_URL = 'https://js.ciphera.net/script.interactions.js';
 
     /**
      * A registrable hostname.
@@ -120,19 +114,5 @@ final class TagBuilder
         }
 
         return [self::SCRIPT_URL, $options];
-    }
-
-    /**
-     * Builds the [$url, $options] pair for the companion (interactions) tag.
-     *
-     * No data-domain on the companion: the tracker resolves the domain once,
-     * from the core script, and a second copy is a second thing to keep in
-     * step.
-     *
-     * @return array{0: string, 1: array<string, bool>}
-     */
-    public static function companionTag(): array
-    {
-        return [self::COMPANION_URL, ['defer' => true]];
     }
 }
