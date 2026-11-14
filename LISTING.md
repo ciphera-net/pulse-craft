@@ -19,17 +19,17 @@ Console account, which does not exist yet.
 Keep this to a single line; the Plugin Store truncates long ones on card
 views.
 
-> Pulse Analytics counts visitors without cookies or stored IP addresses. The script this plugin adds to your pages is under 3 KB.
+> Pulse Analytics counts visitors without cookies or stored IP addresses. The script this plugin adds to your pages is about 3 KB.
 
 ## Long description
 
 ```markdown
-Pulse Analytics adds privacy-first web analytics to a Craft CMS site with one plugin. It sets no cookies and never stores IP addresses. The script it adds to your pages is under 3 KB.
+Pulse Analytics adds privacy-first web analytics to a Craft CMS site with one plugin. It sets no cookies and never stores IP addresses. The script it adds to your pages is about 3 KB.
 
 ## How it works
 
 1. Run `composer require ciphera/craft-pulse-analytics` and `php craft plugin/install pulse-analytics`.
-2. Go to Settings → Plugins → Pulse Analytics and enter the domain your site is registered under in Pulse. If you leave it empty, the tracker uses the browser's own hostname, which is right for a site served on one domain.
+2. Go to Settings > Plugins > Pulse Analytics and enter the domain your site is registered under in Pulse. If you leave it empty, the tracker uses the browser's own hostname, which is right for a site served on one domain.
 3. Make sure your layout calls `{{ head() }}`. Craft outputs head-registered scripts only at that call, and this plugin registers its script that way.
 
 Your dashboard at pulse.ciphera.net shows visitors as they arrive.
@@ -40,11 +40,11 @@ Pulse counts pageviews, referrers, countries, devices, time on page and scroll d
 
 ## Options
 
-You can add a companion script for clicks, copies and form submits. It loads as a second request, so you only pay for it if you want it. You can also set a custom API origin if you route events through your own proxy.
+You can set a custom API origin if you route events through your own proxy. Scroll depth, outbound links, file downloads, and clicks, copies and form submits are each switched on or off in your site's settings in Pulse (Settings > General). The tag stays the same, so there is nothing to change here.
 
 ## You need
 
-Craft CMS 5, PHP 8.2+, and a Pulse Analytics account with a site registered for the same domain. The free plan covers one site and 10,000 events a month, and you do not need a card. Business starts at €9 a month with VAT. Every plan has every feature.
+Craft CMS 5, PHP 8.2+, and a Pulse Analytics account with a site registered for the same domain. The free plan covers one site and 10,000 events a month, and you do not need a card. Business starts at 9 EUR a month with VAT. Every plan has every feature.
 ```
 
 ## Categories and keywords

@@ -26,7 +26,6 @@ final class SettingsTest extends TestCase
 
         self::assertTrue($settings->validate());
         self::assertSame('', $settings->domain);
-        self::assertFalse($settings->companion);
         self::assertSame('', $settings->apiOrigin);
     }
 
@@ -63,12 +62,19 @@ final class SettingsTest extends TestCase
         }
     }
 
-    public function testCompanionIsTypecastFromAStringLikeAFormPosts(): void
+    /**
+     * Craft loads saved settings with setAttributes($values, false), which
+     * ignores keys the model does not define. A project that still carries a
+     * `companion` value from 1.0.x must keep working.
+     */
+    public function testAStoredCompanionValueFromAnOlderVersionIsIgnored(): void
     {
-        self::assertTrue((new Settings(['companion' => '1']))->companion);
-        self::assertFalse((new Settings(['companion' => '0']))->companion);
-        self::assertTrue((new Settings(['companion' => true]))->companion);
-        self::assertFalse((new Settings())->companion);
+        $settings = new Settings();
+        $settings->setAttributes(['domain' => 'example.com', 'companion' => true], false);
+
+        self::assertTrue($settings->validate());
+        self::assertSame('example.com', $settings->domain);
+        self::assertFalse(property_exists($settings, 'companion'));
     }
 
     public function testApiOriginIsNormalisedAndTrailingSlashesStripped(): void
@@ -98,7 +104,6 @@ final class SettingsTest extends TestCase
     {
         $settings = new Settings([
             'domain' => 'chosen.dev',
-            'companion' => true,
             'apiOrigin' => 'https://proxy.example.com',
         ]);
 

@@ -81,12 +81,6 @@ class Plugin extends BasePlugin
         [$url, $options] = TagBuilder::trackerTag($settings->domain, $settings->apiOrigin);
         $options['position'] = View::POS_HEAD;
         $view->registerJsFile($url, $options, 'pulse-analytics-tracker');
-
-        if ($settings->companion) {
-            [$companionUrl, $companionOptions] = TagBuilder::companionTag();
-            $companionOptions['position'] = View::POS_HEAD;
-            $view->registerJsFile($companionUrl, $companionOptions, 'pulse-analytics-companion');
-        }
     }
 
     protected function createSettingsModel(): ?Model

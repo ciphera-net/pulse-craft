@@ -250,22 +250,23 @@ restart_server
 
 FAILURES=0
 CORE='https://js\.ciphera\.net/script\.js'
-COMP='https://js\.ciphera\.net/script\.interactions\.js'
 
 set_config() {
-  # $1 domain  $2 companion (true/false, bare PHP)  $3 apiOrigin
+  # $1 domain  $2 apiOrigin  $3 stale (1 = also write the retired `companion` key)
   # config/pulse-analytics.php is Craft's own per-environment settings
   # override file for this plugin's handle — writing it is the scriptable
   # equivalent of saving the control panel settings form, with no need to
   # drive a real browser session against the CP.
+  local stale=""
+  [ -n "${3:-}" ] && stale="    'companion' => true,
+"
   docker exec "$APP" mkdir -p config
   docker exec "$APP" bash -lc "cat > config/pulse-analytics.php <<EOF
 <?php
 return [
     'domain' => '$1',
-    'companion' => $2,
-    'apiOrigin' => '$3',
-];
+    'apiOrigin' => '$2',
+$stale];
 EOF"
   restart_server
 }
@@ -306,28 +307,28 @@ docker exec "$APP" php craft plugin/enable pulse-analytics --interactive=0
 
 echo "==> checking the served HTML"
 
-set_config "example.com" "false" ""
+set_config "example.com" ""
 check "domain only" \
   "<script src=\"$CORE\" defer data-domain=\"example\.com\"></script>" ""
 
-set_config "chosen.dev" "true" "https://proxy.example.com/"
-check "domain + api + companion, companion carries no domain" \
-  "<script src=\"$CORE\" defer data-domain=\"chosen\.dev\" data-api=\"https://proxy\.example\.com\"></script> <script src=\"$COMP\" defer></script>" \
-  ""
+set_config "chosen.dev" "https://proxy.example.com/" 1
+check "domain + api, and a stale companion value still renders ONE tag" \
+  "<script src=\"$CORE\" defer data-domain=\"chosen\.dev\" data-api=\"https://proxy\.example\.com\"></script>" \
+  "interactions|data-no-|data-ignore-"
 
-set_config "" "false" ""
+set_config "" ""
 check "no domain configured: auto-detect, not a broken attribute" \
   "^<script src=\"$CORE\" defer></script> \$" \
   "data-domain"
 
-set_config 'bad" onload="x' "false" ""
+set_config 'bad" onload="x' ""
 check "an invalid domain is dropped, never injected" \
   "^<script src=\"$CORE\" defer></script> \$" \
   "onload"
 
 # ── The control panel, unconditionally ──────────────────────────────────────
 echo "==> the control panel carries no tag (unconditional — not a setting)"
-set_config "example.com" "true" ""
+set_config "example.com" "" 1
 CP_HTML=$(curl -s "http://127.0.0.1:${HTTP_PORT}/admin/login")
 CP_HITS=$(printf '%s' "$CP_HTML" | grep -c 'ciphera' || true)
 if [ "$CP_HITS" -eq 0 ]; then
